@@ -1,0 +1,56 @@
+<div class="container">
+
+    <div class="row plus">
+        <div class="col"></div>
+        <div class="col"></div>
+        <div class="col">
+            <button type="button" class="btn btn-success">
+                <fa-icon [icon]="faPlus"></fa-icon>
+                Add new machine
+            </button>
+        </div>
+    </div>
+    <br>
+
+    <table class="table table-striped">
+        <caption>Máquinas cadastradas</caption>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">IP</th>
+                <th scope="col">Hostname</th>
+                <th scope="col">Password</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let machine of machines; index as i">
+                <th scope="row">{{ i + 1 }}</th>
+                <td>{{ machine.ip }}</td>
+                <td>{{ machine.hostname }}</td>
+                <td>{{ machine.password }}</td>
+                <td>
+                    <button type="button" class="btn btn-primary">
+                        <fa-icon [icon]="faEye"></fa-icon>
+                    </button>
+                    <button type="button" class="btn btn-success">
+                        <fa-icon [icon]="faEdit"></fa-icon>
+                    </button>
+                    <button type="button" class="btn btn-danger">
+                        <fa-icon [icon]="faTrashAlt"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+            <option [ngValue]="2">2 items per page</option>
+            <option [ngValue]="4">4 items per page</option>
+            <option [ngValue]="6">6 items per page</option>
+        </select>
+    </div>
+</div>
