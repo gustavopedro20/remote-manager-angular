@@ -18,6 +18,7 @@
             <tr>
                 <th scope="col">#</th>
                 <th scope="col">IP</th>
+                <th scope="col">Port</th>
                 <th scope="col">Hostname</th>
                 <th scope="col">Password</th>
                 <th scope="col">Ações</th>
@@ -27,16 +28,17 @@
             <tr *ngFor="let machine of machines; index as i">
                 <th scope="row">{{ machine.id }}</th>
                 <td>{{ machine.ip }}</td>
+                <td>{{ machine.port }}</td>
                 <td>{{ machine.hostname }}</td>
                 <td>{{ machine.password }}</td>
                 <td>
                     <!-- <button mat-mini-fab color="primary" (click)="test()">
                         <mat-icon>touch_app</mat-icon>
                     </button> -->
-                    <button type="button" class="btn btn-success" (click)="onEdit(machine.id)">
+                    <button type="button" class="btn btn-success gg-btn" (click)="onEdit(machine.id)">
                         <fa-icon [icon]="faEdit"></fa-icon>
                     </button>
-                    <button type="button" class="btn btn-danger">
+                    <button type="button" class="btn btn-danger gg-btn">
                         <fa-icon [icon]="faTrashAlt"></fa-icon>
                     </button>
                 </td>

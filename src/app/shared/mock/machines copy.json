@@ -1,0 +1,52 @@
+{
+    "machines": [
+        {
+            "id": 1,
+            "ip": "76.96.19.13",
+            "hostname": "Carlos",
+            "password": "*********"
+        },
+        {
+            "id": 2,
+            "ip": "255.28.248.124",
+            "hostname": "Joel",
+            "password": "*********"
+        },
+        {
+            "id": 3,
+            "ip": "232.252.204.40",
+            "hostname": "Maria",
+            "password": "*********"
+        },
+        {
+            "id": 4,
+            "ip": "175.250.173.230",
+            "hostname": "Eduardo",
+            "password": "*********"
+        },
+        {
+            "id": 5,
+            "ip": "185.151.232.49",
+            "hostname": "Claudia",
+            "password": "*********"
+        },
+        {
+            "id": 6,
+            "ip": "32.80.142.160",
+            "hostname": "João",
+            "password": "*********"
+        },
+        {
+            "id": 7,
+            "ip": "77.158.56.63",
+            "hostname": "Pedro",
+            "password": "*********"
+        },
+        {
+            "id": 8,
+            "ip": "249.53.255.166",
+            "hostname": "Patrícia",
+            "password": "*********"
+        }
+    ]
+}

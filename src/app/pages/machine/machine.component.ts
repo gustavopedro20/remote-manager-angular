@@ -39,8 +39,7 @@ export class MachineComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   get machines(): IMachine[] {
     return this.machineList

@@ -1,26 +1,68 @@
-[
+{
+  "machines": [
     {
-        "id": 1,
-        "ip": "192.168.0.2",
-        "hostname": "machine2",
-        "password": "324sdaf2ino"
+      "id": 1,
+      "ip": "76.96.19.13",
+      "hostname": "Carlos",
+      "password": "*********",
+      "port": 22,
+      "system": "UNIX"
     },
     {
-        "id": 2,
-        "ip": "192.168.0.3",
-        "hostname": "machine3",
-        "password": "34dffsdg435"
+      "id": 2,
+      "ip": "255.28.248.124",
+      "hostname": "Joel",
+      "password": "*********",
+      "port": 22,
+      "system": "UNIX"
     },
     {
-        "id": 3,
-        "ip": "192.168.0.4",
-        "hostname": "machine4",
-        "password": "3423fdf2"
+      "id": 3,
+      "ip": "232.252.204.40",
+      "hostname": "Maria",
+      "password": "*********",
+      "port": 22,
+      "system": "UNIX"
     },
     {
-        "id": 4,
-        "ip": "192.168.0.5",
-        "hostname": "machine5",
-        "password": "342sdfsdfsd"
+      "id": 4,
+      "ip": "175.250.173.230",
+      "hostname": "Eduardo",
+      "password": "*********",
+      "port": 22,
+      "system": "UNIX"
+    },
+    {
+      "id": 5,
+      "ip": "185.151.232.49",
+      "hostname": "Claudia",
+      "password": "*********",
+      "port": 22,
+      "system": "UNIX"
+    },
+    {
+      "id": 6,
+      "ip": "32.80.142.160",
+      "hostname": "João",
+      "password": "*********",
+      "port": 22,
+      "system": "UNIX"
+    },
+    {
+      "id": 7,
+      "ip": "77.158.56.63",
+      "hostname": "Pedro",
+      "password": "*********",
+      "port": 22,
+      "system": "UNIX"
+    },
+    {
+      "id": 8,
+      "ip": "249.53.255.166",
+      "hostname": "Patrícia",
+      "password": "*********",
+      "port": 22,
+      "system": "UNIX"
     }
-]
+  ]
+}
