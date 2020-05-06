@@ -1,0 +1,31 @@
+<div class="container">
+    <form [formGroup]="form">
+        <mat-form-field class="full-width">
+            <mat-label>IP</mat-label>
+            <input matInput placeholder="Ex. 192.168.1.1" formControlName="ip">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Port</mat-label>
+            <input matInput placeholder="Ex. 22" formControlName="port">
+        </mat-form-field>
+        <br>
+        <mat-form-field class="full-width">
+            <mat-label>Username</mat-label>
+            <input matInput placeholder="Ex. my-machine" formControlName="hostname">
+        </mat-form-field>
+        <mat-form-field class="full-width">
+            <mat-label>Password</mat-label>
+            <input matInput placeholder="Ex. my-password" formControlName="password">
+        </mat-form-field>
+        <br>
+
+        <mat-radio-group aria-label="Select an option" formControlName="system">
+            <mat-radio-button value="UNIX" class="gg-radio">Unix</mat-radio-button>
+            <mat-radio-button value="WINDOWS" class="gg-radio">Windows10</mat-radio-button>
+        </mat-radio-group>
+        <br>
+        <button mat-raised-button color="accent" class="gg-btn" (click)="redirect('machine')"
+            routerLinkActive="router-link-active">Back</button>
+        <button mat-raised-button color="primary" class="gg-btn" [disabled]="form.invalid" (click)="onSave()">Save</button>
+    </form>
+</div>

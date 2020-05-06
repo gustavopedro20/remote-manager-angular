@@ -4,7 +4,7 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-            <button type="button" class="btn btn-success">
+            <button type="button" class="btn btn-success"(click)="onCreate()">
                 <fa-icon [icon]="faPlus"></fa-icon>
                 Add new machine
             </button>
@@ -25,15 +25,15 @@
         </thead>
         <tbody>
             <tr *ngFor="let machine of machines; index as i">
-                <th scope="row">{{ i + 1 }}</th>
+                <th scope="row">{{ machine.id }}</th>
                 <td>{{ machine.ip }}</td>
                 <td>{{ machine.hostname }}</td>
                 <td>{{ machine.password }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary">
-                        <fa-icon [icon]="faEye"></fa-icon>
-                    </button>
-                    <button type="button" class="btn btn-success">
+                    <!-- <button mat-mini-fab color="primary" (click)="test()">
+                        <mat-icon>touch_app</mat-icon>
+                    </button> -->
+                    <button type="button" class="btn btn-success" (click)="onEdit(machine.id)">
                         <fa-icon [icon]="faEdit"></fa-icon>
                     </button>
                     <button type="button" class="btn btn-danger">
@@ -48,9 +48,9 @@
         </ngb-pagination>
 
         <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
-            <option [ngValue]="2">2 items per page</option>
-            <option [ngValue]="4">4 items per page</option>
-            <option [ngValue]="6">6 items per page</option>
+            <option [value]="2">2 items per page</option>
+            <option [value]="4">4 items per page</option>
+            <option [value]="6">6 items per page</option>
         </select>
     </div>
 </div>

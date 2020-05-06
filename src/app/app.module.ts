@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReactiveFormsModule, FormsModule} from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -11,7 +12,6 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './shared/navbar/navbar.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { MachineComponent } from './pages/machine/machine.component';
 import { ChartComponent } from './pages/chart/chart.component';
 
 @NgModule({
@@ -19,7 +19,6 @@ import { ChartComponent } from './pages/chart/chart.component';
     AppComponent,
     NavbarComponent,
     FooterComponent,
-    MachineComponent,
     ChartComponent
   ],
   imports: [
@@ -30,7 +29,8 @@ import { ChartComponent } from './pages/chart/chart.component';
     NgbModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

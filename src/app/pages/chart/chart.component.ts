@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as Chart from 'chart.js'
+import { SshService } from 'src/app/shared/services/ssh.service';
+import { StatisticsTemp } from 'src/app/models/statistics-temp.model';
 
 @Component({
   templateUrl: './chart.component.html',
@@ -7,32 +9,36 @@ import * as Chart from 'chart.js'
 })
 export class ChartComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
   canvas: any;
   ctx: any;
-  ngAfterViewInit() {
+  temp: StatisticsTemp = {};
+
+  constructor(private sshService: SshService) { }
+
+  ngOnInit(): void { }
+
+  ngAfterViewInit(): void {
+    this.sshService.getStatisticsTemp().subscribe(data => {
+      this.temp = data;
+      this.loadCanvas();
+    });
+  }
+
+  loadCanvas() {
     this.canvas = document.getElementById('myChart');
     this.ctx = this.canvas.getContext('2d');
     let myChart = new Chart(this.ctx, {
       type: 'pie',
       data: {
-        labels: ["Total", "Free", "Using"],
+        labels: ['buff', 'cache', 'free', 'swpd'],
         datasets: [{
           label: '# of Votes',
-          data: [1988340, 697540, 468816],
-          // backgroundColor: [
-          //     'rgba(255, 99, 132, 1)',
-          //     'rgba(54, 162, 235, 1)',
-          //     'rgba(255, 206, 86, 1)'
-          // ],
+          data: [this.temp?.memory?.buff, this.temp?.memory?.cache, this.temp?.memory?.free, this.temp?.memory?.swpd],
           backgroundColor: [
             'rgba(54, 162, 235, 1)',
             'rgba(48, 187, 49, 1)',
-            'rgba(226, 43, 16, 1)'
+            'rgba(226, 43, 16, 1)',
+            'rgba(226, 80, 16, 1)'
           ],
           borderWidth: 1
         }]

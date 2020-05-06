@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { ChartComponent } from './pages/chart/chart.component';
-import { MachineComponent } from './pages/machine/machine.component';
-
 
 const routes: Routes = [
-  { path: 'machine', component: MachineComponent },
+  { path: '', pathMatch: 'full', redirectTo: 'machine'},
+  { 
+    path: 'machine',
+    loadChildren: () => import('./pages/machine/machine.module').then(m => m.MachineModule)
+  },
   { path: 'chart', component: ChartComponent }
 ];
 

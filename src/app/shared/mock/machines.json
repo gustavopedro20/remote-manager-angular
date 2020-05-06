@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "ip": "192.168.0.2",
+        "hostname": "machine2",
+        "password": "324sdaf2ino"
+    },
+    {
+        "id": 2,
+        "ip": "192.168.0.3",
+        "hostname": "machine3",
+        "password": "34dffsdg435"
+    },
+    {
+        "id": 3,
+        "ip": "192.168.0.4",
+        "hostname": "machine4",
+        "password": "3423fdf2"
+    },
+    {
+        "id": 4,
+        "ip": "192.168.0.5",
+        "hostname": "machine5",
+        "password": "342sdfsdfsd"
+    }
+]

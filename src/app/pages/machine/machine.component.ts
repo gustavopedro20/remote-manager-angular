@@ -4,36 +4,10 @@ import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-
-
-interface Machine {
-  ip: string;
-  hostname: string;
-  password: string;
-}
-
-const MACHINES: Machine[] = [
-  {
-    ip: '192.168.0.2',
-    hostname: 'machine2',
-    password: '********'
-  },
-  {
-    ip: '192.168.0.3',
-    hostname: 'machine3',
-    password: '********'
-  },
-  {
-    ip: '192.168.0.4',
-    hostname: 'machine4',
-    password: '********'
-  },
-  {
-    ip: '192.168.0.5',
-    hostname: 'machine5',
-    password: '********'
-  },
-];
+import { IMachine } from 'src/app/models/machine.model';
+import { MachineService } from 'src/app/shared/services/machine.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-machine',
@@ -47,17 +21,39 @@ export class MachineComponent implements OnInit {
   faPlus = faPlus
   page = 1;
   pageSize = 4;
-  collectionSize = MACHINES.length;
+  machineList = [];
+  collectionSize = 0;
+  form = this.fb.group({
+    machines: []
+  });
 
-  constructor() { }
+  constructor(
+    private machineService: MachineService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder
+  ) {
+    this.machineService.findAll().subscribe(machines => {
+      this.machineList = machines;
+      this.collectionSize = this.machineList.length;
+    });
+  }
 
   ngOnInit(): void {
   }
 
-  get machines(): Machine[] {
-    return MACHINES
+  get machines(): IMachine[] {
+    return this.machineList
       .map((machine, i) => ({ id: i + 1, ...machine }))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
+  }
+
+  onEdit(machineId?: number) {
+    this.router.navigate(['edit', machineId], { relativeTo: this.route });
+  }
+
+  onCreate() {
+    this.router.navigate(['new'], { relativeTo: this.route });
   }
 
 }
