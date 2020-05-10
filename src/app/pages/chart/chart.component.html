@@ -3,4 +3,58 @@
         <h3>Temp Memory Statistics - Machine: 192.168.87.129</h3>
         <canvas id="myChart" width="700" height="400"></canvas>
     </div>
+    <br>
+    <table class="table table-striped">
+        <caption>Tasks em execução</caption>
+        <thead>
+            <tr>
+                <th scope="col">PID</th>
+                <th scope="col">USER</th>
+                <th scope="col">PR</th>
+                <th scope="col">NI</th>
+                <th scope="col">VIRT</th>
+                <th scope="col">RES</th>
+                <th scope="col">SHR</th>
+                <th scope="col">S</th>
+                <th scope="col">%CPU</th>
+                <th scope="col">%MEM</th>
+                <th scope="col">TIME+</th>
+                <th scope="col">COMMAND</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let task of tasks; let i = index">
+                <th scope="row">{{ task.PID }}</th>
+                <td>{{ task.USER }}</td>
+                <td>{{ task.PR }}</td>
+                <td>{{ task.NI }}</td>
+                <td>{{ task.VIRT }}</td>
+                <td>{{ task.RES }}</td>
+                <td>{{ task.SHR }}</td>
+                <td>{{ task.S }}</td>
+                <td>{{ task.CPU }}</td>
+                <td>{{ task.MEM }}</td>
+                <td>{{ task.TIME }}</td>
+                <td>{{ task.COMMAND }}</td>
+                <td>
+                    <button type="button" class="btn btn-danger gg-btn"
+                        style="background-color: #ffd740; border-color: #ffd740; color: #000000;"
+                        (click)="onDelet(task)">
+                        <fa-icon [icon]="faTrashAlt"></fa-icon>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-between p-2">
+        <ngb-pagination [collectionSize]="collectionSize" [(page)]="page" [pageSize]="pageSize">
+        </ngb-pagination>
+
+        <select class="custom-select" style="width: auto" [(ngModel)]="pageSize">
+            <option [value]="20">20 items per page</option>
+            <option [value]="40">40 items per page</option>
+            <option [value]="60">60 items per page</option>
+        </select>
+    </div>
 </div>
