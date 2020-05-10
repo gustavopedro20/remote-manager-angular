@@ -7,8 +7,8 @@ import { timer } from 'rxjs';
 import * as Chart from 'chart.js';
 
 import { SshService } from 'src/app/shared/services/ssh.service';
-import { StatisticsTemp } from 'src/app/models/statistics-temp.model';
 import { ITask } from 'src/app/models/task.model';
+import { IMen } from 'src/app/models/men.mode';
 
 @Component({
   templateUrl: './chart.component.html',
@@ -23,30 +23,26 @@ export class ChartComponent implements OnInit, AfterViewInit {
   page = 1;
   pageSize = 40;
   collectionSize = 0;
-  timer = timer(0, 10000);
+  timer = timer(0, 15000);
 
   constructor(private sshService: SshService) { }
 
-  ngOnInit(): void {
-    this.loadTasks();
-  }
+  ngOnInit(): void { }
 
   ngAfterViewInit(): void {
-    this.sshService.getSwapStatistics().pipe(take(1)).subscribe(temp => {
-      this.loadCanvasSwap(temp);
-    });
+    this.loadTasksAnMen();
   }
 
-  loadCanvasSwap(temp: StatisticsTemp) {
+  loadCanvas(temp: IMen) {
     this.canvas = document.getElementById('myChart');
     this.ctx = this.canvas.getContext('2d');
     this.myChart = new Chart(this.ctx, {
       type: 'pie',
       data: {
-        labels: ['buff', 'cache', 'free', 'swpd'],
+        labels: ['Total', 'Free', 'Used', 'Cache/buff'],
         datasets: [{
           label: '# of Votes',
-          data: [temp?.memory?.buff, temp?.memory?.cache, temp?.memory?.free, temp?.memory?.swpd],
+          data: [temp.total, temp.free, temp.used, temp['buff/cache']],
           backgroundColor: [
             'rgba(54, 162, 235, 1)',
             'rgba(48, 187, 49, 1)',
@@ -63,10 +59,11 @@ export class ChartComponent implements OnInit, AfterViewInit {
     });
   }
 
-  loadTasks() {
+  loadTasksAnMen() {
     this.timer.subscribe(() => {
-      this.sshService.getAllTasks().pipe(take(1)).subscribe(data => {
-        this.tasksList = data;
+      this.sshService.getAllTasksAndMen().pipe(take(1)).subscribe(data => {
+        this.loadCanvas(data.men);
+        this.tasksList = data.tasks;
         this.collectionSize = this.tasksList.length;
       });
     });

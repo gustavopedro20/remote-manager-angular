@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <h3>Temp Memory Statistics - Machine: 192.168.87.129</h3>
+        <h3>Memory Statistics - Machine: 192.168.87.129</h3>
         <canvas id="myChart" width="700" height="400"></canvas>
     </div>
     <br>
@@ -27,12 +27,12 @@
             <tr *ngFor="let task of tasks; let i = index">
                 <th scope="row">{{ task.PID }}</th>
                 <td>{{ task.USER }}</td>
-                <!-- <td>{{ task.PR }}</td> -->
-                <!-- <td>{{ task.NI }}</td> -->
-                <!-- <td>{{ task.VIRT }}</td> -->
-                <!-- <td>{{ task.RES }}</td> -->
-                <!-- <td>{{ task.SHR }}</td> -->
-                <!-- <td>{{ task.S }}</td> -->
+                <!-- <td>{{ task.PR }}</td>
+                <td>{{ task.NI }}</td>
+                <td>{{ task.VIRT }}</td>
+                <td>{{ task.RES }}</td>
+                <td>{{ task.SHR }}</td>
+                <td>{{ task.S }}</td> -->
                 <td>{{ task.CPU }}</td>
                 <td>{{ task.MEM }}</td>
                 <td>{{ task.TIME }}</td>

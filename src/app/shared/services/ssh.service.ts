@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 import { StatisticsTemp } from 'src/app/models/statistics-temp.model';
 import { ITask } from 'src/app/models/task.model';
 import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
+import { ITaskMen } from 'src/app/models/dto/tasks-menDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +20,15 @@ export class SshService {
     return this.http.get(`${environment.API_URL}/swap/statistics`);
   }
 
-  getAllTasks(): Observable<ITask[]> {
-    return this.http.get<ITask[]>(`${environment.API_URL}/tasks`).pipe(
-      map(t => this.sortDesc(t))
+  getAllTasksAndMen(): Observable<ITaskMen> {
+    return this.http.get<ITaskMen>(`${environment.API_URL}/tasks`).pipe(
+      tap(tm => {
+        this.sortDesc(tm.tasks);
+        tm.men['buff/cache'] = tm.men['buff/cache'] / 1000;
+        tm.men.free = tm.men.free / 1000;
+        tm.men.total = tm.men.total / 1000;
+        tm.men.used = tm.men.used / 1000;
+      })
     );
   }
 

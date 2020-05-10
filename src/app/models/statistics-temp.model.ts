@@ -1,10 +1,10 @@
 export interface StatisticsTemp {
-    cpu?:     CPU;
-    "e/s"?:   ES;
-    memory?:  Memory;
+    cpu?: CPU;
+    'e/s'?: ES;
+    memory?: Memory;
     process?: Process;
-    swap?:    Swap;
-    system?:  System;
+    swap?: Swap;
+    system?: System;
 }
 
 interface CPU {
@@ -21,10 +21,10 @@ interface ES {
 }
 
 interface Memory {
-    buff?:  string;
+    buff?: string;
     cache?: string;
-    free?:  string;
-    swpd?:  string;
+    free?: string;
+    swpd?: string;
 }
 
 interface Process {
