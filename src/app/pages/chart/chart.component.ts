@@ -3,6 +3,7 @@ import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { take } from 'rxjs/operators';
+import { timer } from 'rxjs';
 import * as Chart from 'chart.js';
 
 import { SshService } from 'src/app/shared/services/ssh.service';
@@ -22,6 +23,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
   page = 1;
   pageSize = 40;
   collectionSize = 0;
+  timer = timer(0, 10000);
 
   constructor(private sshService: SshService) { }
 
@@ -62,9 +64,11 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   loadTasks() {
-    this.sshService.getAllTasks().subscribe(data => {
-      this.tasksList = data;
-      this.collectionSize = this.tasksList.length;
+    this.timer.subscribe(() => {
+      this.sshService.getAllTasks().pipe(take(1)).subscribe(data => {
+        this.tasksList = data;
+        this.collectionSize = this.tasksList.length;
+      });
     });
   }
 
