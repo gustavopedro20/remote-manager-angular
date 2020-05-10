@@ -11,7 +11,7 @@
         <br>
         <mat-form-field class="full-width">
             <mat-label>Username</mat-label>
-            <input matInput placeholder="Ex. my-machine" formControlName="username">
+            <input matInput placeholder="Ex. my-machine" formControlName="hostname">
         </mat-form-field>
         <mat-form-field class="full-width">
             <mat-label>Password</mat-label>
@@ -26,6 +26,6 @@
         <br>
         <button mat-raised-button color="accent" class="gg-btn" (click)="redirect('machine')"
             routerLinkActive="router-link-active">Back</button>
-        <button mat-raised-button color="primary" class="gg-btn" (click)="onSave()">Save</button>
+        <button mat-raised-button color="primary" class="gg-btn" [disabled]="form.invalid" (click)="onSave()">Save</button>
     </form>
 </div>

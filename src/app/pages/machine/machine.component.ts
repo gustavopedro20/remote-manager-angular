@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faEye } from '@fortawesome/free-solid-svg-icons';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
+
+import { take } from 'rxjs/operators';
+
 import { IMachine } from 'src/app/models/machine.model';
 import { MachineService } from 'src/app/shared/services/machine.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder } from '@angular/forms';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-machine',
@@ -15,23 +18,19 @@ import { FormBuilder } from '@angular/forms';
   styleUrls: ['./machine.component.scss']
 })
 export class MachineComponent implements OnInit {
-  faTrashAlt = faTrashAlt
-  faEdit = faEdit
-  faEye = faEye
-  faPlus = faPlus
+  faTrashAlt = faTrashAlt;
+  faEdit = faEdit;
+  faEye = faEye;
+  faPlus = faPlus;
   page = 1;
   pageSize = 4;
   machineList = [];
   collectionSize = 0;
-  form = this.fb.group({
-    machines: []
-  });
 
   constructor(
     private machineService: MachineService,
     private router: Router,
-    private route: ActivatedRoute,
-    private fb: FormBuilder
+    private route: ActivatedRoute
   ) {
     this.machineService.findAll().subscribe(machines => {
       this.machineList = machines;
@@ -55,4 +54,10 @@ export class MachineComponent implements OnInit {
     this.router.navigate(['new'], { relativeTo: this.route });
   }
 
+  onDelet(machine: IMachine) {
+    this.machineService.delete(machine.id).pipe(take(1)).subscribe(() => {
+      const index = this.machines.indexOf(machine);
+      this.machineList.splice(index, 1);
+    });
+  }
 }

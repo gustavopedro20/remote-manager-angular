@@ -4,7 +4,7 @@
         <div class="col"></div>
         <div class="col"></div>
         <div class="col">
-            <button type="button" class="btn btn-success"(click)="onCreate()">
+            <button type="button" class="btn btn-success" (click)="onCreate()">
                 <fa-icon [icon]="faPlus"></fa-icon>
                 Add new machine
             </button>
@@ -20,6 +20,7 @@
                 <th scope="col">IP</th>
                 <th scope="col">Port</th>
                 <th scope="col">Hostname</th>
+                <th scope="col">System</th>
                 <th scope="col">Password</th>
                 <th scope="col">Ações</th>
             </tr>
@@ -30,15 +31,20 @@
                 <td>{{ machine.ip }}</td>
                 <td>{{ machine.port }}</td>
                 <td>{{ machine.hostname }}</td>
+                <td>{{ machine.system }}</td>
                 <td>{{ machine.password }}</td>
                 <td>
                     <!-- <button mat-mini-fab color="primary" (click)="test()">
                         <mat-icon>touch_app</mat-icon>
                     </button> -->
-                    <button type="button" class="btn btn-success gg-btn" (click)="onEdit(machine.id)">
+
+                    <button type="button" class="btn btn-success gg-btn"
+                        style="background-color: #673ab7; border-color: #673ab7;" (click)="onEdit(machine.id)">
                         <fa-icon [icon]="faEdit"></fa-icon>
                     </button>
-                    <button type="button" class="btn btn-danger gg-btn">
+                    <button type="button" class="btn btn-danger gg-btn"
+                        style="background-color: #ffd740; border-color: #ffd740; color: #000000;"
+                        (click)="onDelet(machine)">
                         <fa-icon [icon]="faTrashAlt"></fa-icon>
                     </button>
                 </td>

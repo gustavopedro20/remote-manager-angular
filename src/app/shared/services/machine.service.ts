@@ -30,7 +30,7 @@ export class MachineService {
   }
 
   update(machine: Machine | IMachine): Observable<IMachine> {
-    return this.http.put(this.resourceUrl, machine);
+    return this.http.put(this.resourceUrl + '/' + machine.id, machine);
   }
 
 }
