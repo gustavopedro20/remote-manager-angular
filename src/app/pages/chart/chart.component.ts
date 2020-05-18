@@ -52,21 +52,22 @@ export class ChartComponent implements OnInit, AfterViewInit {
           borderWidth: 1
         }]
       },
-      options: {
-        responsive: false,
-        display: true
-      }
+      // options: {
+      //   responsive: false,
+      //   display: true
+      // }
     });
   }
 
   loadTasksAnMen() {
-    this.timer.subscribe(() => {
-      this.sshService.getAllTasksAndMen().pipe(take(1)).subscribe(data => {
-        this.loadCanvas(data.men);
-        this.tasksList = data.tasks;
-        this.collectionSize = this.tasksList.length;
-      });
-    });
+    // this.timer.subscribe(() => {
+    //   this.sshService.getAllTasksAndMen().pipe(take(1)).subscribe(data => {
+    //     this.loadCanvas(data.men);
+    //     this.tasksList = [];
+    //     this.tasksList = data.tasks;
+    //     this.collectionSize = this.tasksList.length;
+    //   });
+    // });
   }
 
   onDelet(task: ITask) {

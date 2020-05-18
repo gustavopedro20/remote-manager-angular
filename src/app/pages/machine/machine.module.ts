@@ -14,11 +14,18 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MachineComponent } from './machine.component';
 import { MachineRouterModule } from './machines-routing.module';
 
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { environment } from 'src/environments/environment';
+import { MachineViewComponent } from './view/machine-view.component';
+
+const config: SocketIoConfig = { url: environment.API_URL, options: {} };
+
 @NgModule({
   declarations: [
     MachineEditComponent,
     MachineNewComponent,
-    MachineComponent
+    MachineComponent,
+    MachineViewComponent
   ],
   imports: [
     CommonModule,
@@ -28,7 +35,8 @@ import { MachineRouterModule } from './machines-routing.module';
     MaterialModule,
     NgbModule,
     MachineRouterModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    SocketIoModule.forRoot(config)
   ]
 })
 export class MachineModule { }

@@ -10,7 +10,6 @@ import { take } from 'rxjs/operators';
 
 import { IMachine } from 'src/app/models/machine.model';
 import { MachineService } from 'src/app/shared/services/machine.service';
-import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-machine',
@@ -59,5 +58,9 @@ export class MachineComponent implements OnInit {
       const index = this.machines.indexOf(machine);
       this.machineList.splice(index, 1);
     });
+  }
+
+  onView(machineIp?: string) {
+    this.router.navigate(['view', machineIp], { relativeTo: this.route });
   }
 }

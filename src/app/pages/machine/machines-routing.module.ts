@@ -5,6 +5,7 @@ import { MachineComponent } from './machine.component';
 import { MachineNewComponent } from './new/machine-new.component';
 import { MachineResolverGuard } from '../../shared/guards/machine-resolver.guard';
 import { MachineEditComponent } from './edit/machine-edit.component';
+import { MachineViewComponent } from './view/machine-view.component';
 
 export const routes: Routes = [
     {
@@ -21,6 +22,13 @@ export const routes: Routes = [
     {
         path: 'edit/:id',
         component: MachineEditComponent,
+        resolve: {
+            machine: MachineResolverGuard
+        }
+    },
+    {
+        path: 'view/:ip',
+        component: MachineViewComponent,
         resolve: {
             machine: MachineResolverGuard
         }

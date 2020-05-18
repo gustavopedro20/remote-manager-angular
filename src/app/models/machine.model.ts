@@ -8,7 +8,7 @@ export interface IMachine {
     hostname?: string;
     password?: string;
     port?: string;
-    system?: SystemType
+    system?: SystemType;
 }
 
 export class Machine implements IMachine {

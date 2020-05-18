@@ -34,10 +34,9 @@
                 <td>{{ machine.system }}</td>
                 <td>{{ machine.password }}</td>
                 <td>
-                    <!-- <button mat-mini-fab color="primary" (click)="test()">
-                        <mat-icon>touch_app</mat-icon>
-                    </button> -->
-
+                    <button type="button" class="btn btn-success gg-btn" (click)="onView(machine.ip)">
+                        <fa-icon [icon]="faEye"></fa-icon>
+                    </button>
                     <button type="button" class="btn btn-success gg-btn"
                         style="background-color: #673ab7; border-color: #673ab7;" (click)="onEdit(machine.id)">
                         <fa-icon [icon]="faEdit"></fa-icon>
