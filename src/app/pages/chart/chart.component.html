@@ -4,8 +4,11 @@
         <canvas id="myChart" width="700" height="400"></canvas>
     </div>
     <br>
-    <table class="table table-striped">
+    <input type="search" placeholder="Pesquisar por COMMAND" [(ngModel)]="terms" clearInput>
+    <table>
         <caption>Tasks em execução</caption>
+        
+        
         <thead>
             <tr>
                 <th scope="col">PID</th>
@@ -24,7 +27,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let task of tasks; let i = index">
+            <tr *ngFor="let task of taskFilter(terms); let i = index">
                 <th scope="row">{{ task.PID }}</th>
                 <td>{{ task.USER }}</td>
                 <!-- <td>{{ task.PR }}</td>
