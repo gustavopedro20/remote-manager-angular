@@ -9,12 +9,15 @@
         </div>
     </div>
     <br>
+    <input type="search" placeholder="Pesquisar por task name" class="form-control gg-input" [(ngModel)]="terms"
+        clearInput>
+    <br>
     <table class="table table-striped">
         <caption>Tasks em execução</caption>
         <thead>
             <tr>
                 <th scope="col">PID</th>
-                <th scope="col">USER</th>
+                <th scope="col">User</th>
                 <!-- <th scope="col">PR</th>
                 <th scope="col">NI</th>
                 <th scope="col">VIRT</th>
@@ -24,12 +27,12 @@
                 <th scope="col">%CPU</th>
                 <th scope="col">%MEM</th>
                 <th scope="col">TIME+</th>
-                <th scope="col">COMMAND</th>
+                <th scope="col">Task Name</th>
                 <th scope="col">Ações</th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let task of tasks; let i = index">
+            <tr *ngFor="let task of taskFilter(terms); let i = index">
                 <th scope="row">{{ task.PID }}</th>
                 <td>{{ task.USER }}</td>
                 <!-- <td>{{ task.PR }}</td>

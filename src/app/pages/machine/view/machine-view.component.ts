@@ -11,6 +11,7 @@ import { IMen } from 'src/app/models/men.mode';
 import { WebsocketService } from 'src/app/shared/services/websocket.service';
 import { ITaskMenDiskDTO } from 'src/app/models/dto/tasks-men-diskDTO';
 import { IDiskUsage } from 'src/app/models/disk-usage.model';
+import { Utils } from 'src/app/shared/utils/utils';
 
 @Component({
   selector: 'app-machine-view',
@@ -26,6 +27,7 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
   ctx: any;
   ctxDisk: any;
   tasksList: ITask[] = [];
+  terms: any;
   page = 1;
   pageSize = 40;
   collectionSize = 0;
@@ -137,5 +139,12 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
 
   sortDesc(tasks: ITask[]) {
     return tasks.sort((one, two) => (+one.PID > +two.PID ? 1 : -1));
+  }
+
+  taskFilter(terms) {
+    return Utils.isNullOrWhiteSpaces(terms) ?
+      this.tasksList :
+      this.tasksList
+        .filter(x => x.COMMAND != null && x.COMMAND.toLowerCase().includes(terms.toLowerCase()));
   }
 }
