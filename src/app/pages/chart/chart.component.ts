@@ -10,6 +10,8 @@ import { SshService } from 'src/app/shared/services/ssh.service';
 import { ITask } from 'src/app/models/task.model';
 import { IMen } from 'src/app/models/men.mode';
 
+import { Utils } from 'src/app/shared/utils/utils';
+
 @Component({
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss']
@@ -17,6 +19,7 @@ import { IMen } from 'src/app/models/men.mode';
 export class ChartComponent implements OnInit, AfterViewInit {
   faTrashAlt = faTrashAlt;
   myChart: Chart;
+  terms: any;
   canvas: any;
   ctx: any;
   tasksList: ITask[] = [];
@@ -57,6 +60,13 @@ export class ChartComponent implements OnInit, AfterViewInit {
       //   display: true
       // }
     });
+  }
+
+  taskFilter(terms){
+    return Utils.isNullOrWhiteSpaces(terms)?
+        this.tasksList :
+        this.tasksList
+        .filter(x=> x.COMMAND != null && x.COMMAND.toLowerCase().includes(terms.toLowerCase()));
   }
 
   loadTasksAnMen() {
