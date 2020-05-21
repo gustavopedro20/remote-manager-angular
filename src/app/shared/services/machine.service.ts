@@ -11,33 +11,29 @@ import { environment } from 'src/environments/environment';
 })
 export class MachineService {
 
-<<<<<<< HEAD
-  resourceUrl = 'http://localhost:5000';
-=======
   // resourceUrl = 'http://localhost:3000/machines';
   resourceUrl = environment.API_URL + '/api/machines';
->>>>>>> d337d82e6357f6b6790691952028e97070ba9b99
 
   constructor(private http: HttpClient) { }
 
   findAll(): Observable<IMachine[]> {
-    return this.http.get<IMachine[]>(this.resourceUrl + '/api/machines');
+    return this.http.get<IMachine[]>(this.resourceUrl);
   }
 
   find(machineId: number): Observable<IMachine> {
-    return this.http.get(this.resourceUrl + '/api/machines' + machineId);
+    return this.http.get(this.resourceUrl + '/' + machineId);
   }
 
   delete(machineId: number): Observable<IMachine> {
-    return this.http.delete(this.resourceUrl + '/api/machines/' + machineId);
+    return this.http.delete(this.resourceUrl + '/' + machineId);
   }
 
   create(machine: Machine | IMachine): Observable<IMachine> {
-    return this.http.post(this.resourceUrl + '/api/machines', machine);
+    return this.http.post(this.resourceUrl, machine);
   }
 
   update(machine: Machine | IMachine): Observable<IMachine> {
-    return this.http.put(this.resourceUrl + '/api/machines', machine);
+    return this.http.put(this.resourceUrl + '/' + machine.id, machine);
   }
 
 }
