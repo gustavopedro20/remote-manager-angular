@@ -1,7 +1,6 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { timer } from 'rxjs';
 import { take, tap } from 'rxjs/operators';
 import * as Chart from 'chart.js';
 
@@ -94,10 +93,10 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
       .pipe(
         tap((tm: ITaskMenDiskDTO) => {
           this.sortDesc(tm.tasks);
-          tm.men['buff/cache'] = tm.men['buff/cache'] / 1000;
-          tm.men.free = tm.men.free / 1000;
-          tm.men.total = tm.men.total / 1000;
-          tm.men.used = tm.men.used / 1000;
+          tm.men['buff/cache'] = tm.men['buff/cache'] / 100;
+          tm.men.free = tm.men.free / 100;
+          tm.men.total = tm.men.total / 100;
+          tm.men.used = tm.men.used / 100;
           tm.diskUsage.free = tm.diskUsage.free / 1000;
           tm.diskUsage.total = tm.diskUsage.total / 1000;
           tm.diskUsage.usage = tm.diskUsage.usage / 1000;
@@ -109,11 +108,7 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
           this.loadCanvas(data.men);
           this.loadCanvasDisk(data.diskUsage);
         });
-    this.websocketService.emit('create', {});
-    // this.sshService.getDiskUsage().subscribe(data => {
-    //   console.log(data);
-    //   this.loadCanvasDisk(data);
-    // });
+    this.websocketService.emit('tasks', {});
   }
 
   onDelet(task: ITask) {
@@ -131,20 +126,14 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
-  sendEvent() {
-    // this.websocketService.emit('create', {size: 'normal', teams: 2, dictionary: 'Simple'});
-    // this.sshService.getAllTasksAndMenTest().subscribe();
-    this.websocketService.emit('create', false);
-  }
-
   sortDesc(tasks: ITask[]) {
     return tasks.sort((one, two) => (+one.PID > +two.PID ? 1 : -1));
   }
 
-  taskFilter(terms) {
+  taskFilter(terms?: string) {
     return Utils.isNullOrWhiteSpaces(terms) ?
-      this.tasksList :
-      this.tasksList
+      this.tasks :
+      this.tasks
         .filter(x => x.COMMAND != null && x.COMMAND.toLowerCase().includes(terms.toLowerCase()));
   }
 }

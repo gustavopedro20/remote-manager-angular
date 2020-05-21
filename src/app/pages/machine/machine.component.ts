@@ -31,13 +31,17 @@ export class MachineComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute
   ) {
+    this.init();
+  }
+
+  ngOnInit(): void { }
+
+  init() {
     this.machineService.findAll().subscribe(machines => {
       this.machineList = machines;
       this.collectionSize = this.machineList.length;
     });
   }
-
-  ngOnInit(): void { }
 
   get machines(): IMachine[] {
     return this.machineList
@@ -55,8 +59,7 @@ export class MachineComponent implements OnInit {
 
   onDelet(machine: IMachine) {
     this.machineService.delete(machine.id).pipe(take(1)).subscribe(() => {
-      const index = this.machines.indexOf(machine);
-      this.machineList.splice(index, 1);
+      this.init();
     });
   }
 

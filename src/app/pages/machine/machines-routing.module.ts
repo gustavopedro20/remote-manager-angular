@@ -27,7 +27,7 @@ export const routes: Routes = [
         }
     },
     {
-        path: 'view/:ip',
+        path: 'view/:id',
         component: MachineViewComponent,
         resolve: {
             machine: MachineResolverGuard
