@@ -63,7 +63,8 @@ export class MachineComponent implements OnInit {
     });
   }
 
-  onView(machineIp?: string) {
-    this.router.navigate(['view', machineIp], { relativeTo: this.route });
+  onView(machineId?: string) {
+    localStorage.setItem('machineId', machineId);
+    this.router.navigate(['view', machineId], { relativeTo: this.route });
   }
 }

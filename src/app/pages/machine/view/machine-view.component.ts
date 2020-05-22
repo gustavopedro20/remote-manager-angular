@@ -11,6 +11,9 @@ import { WebsocketService } from 'src/app/shared/services/websocket.service';
 import { ITaskMenDiskDTO } from 'src/app/models/dto/tasks-men-diskDTO';
 import { IDiskUsage } from 'src/app/models/disk-usage.model';
 import { Utils } from 'src/app/shared/utils/utils';
+import { ActivatedRoute } from '@angular/router';
+import { IMachine } from 'src/app/models/machine.model';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-machine-view',
@@ -36,16 +39,21 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
   orange = 'rgba(226, 80, 16, 1)';
   aqua = 'rgba(36, 238, 218, 1)';
   purple = 'rgba(208, 36, 238, 1)';
+  machine: IMachine = {};
+  count = 0;
 
   constructor(
     private sshService: SshService,
-    private websocketService: WebsocketService
+    private websocketService: WebsocketService,
+    private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit(): void { }
 
   ngAfterViewInit(): void {
     this.loadTasksAndMen();
+    this.machine = this.route.snapshot.data.machine;
   }
 
   loadCanvas(temp: IMen) {
@@ -89,26 +97,36 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
   }
 
   loadTasksAndMen() {
-    this.websocketService.getMessages('join_room')
-      .pipe(
-        tap((tm: ITaskMenDiskDTO) => {
-          this.sortDesc(tm.tasks);
-          tm.men['buff/cache'] = tm.men['buff/cache'] / 100;
-          tm.men.free = tm.men.free / 100;
-          tm.men.total = tm.men.total / 100;
-          tm.men.used = tm.men.used / 100;
-          tm.diskUsage.free = tm.diskUsage.free / 1000;
-          tm.diskUsage.total = tm.diskUsage.total / 1000;
-          tm.diskUsage.usage = tm.diskUsage.usage / 1000;
-        })).subscribe((data: ITaskMenDiskDTO) => {
-          console.log(data);
-          this.tasksList = [];
-          this.tasksList = data.tasks;
-          this.collectionSize = this.tasksList.length;
-          this.loadCanvas(data.men);
-          this.loadCanvasDisk(data.diskUsage);
-        });
-    this.websocketService.emit('tasks', {});
+    this.websocketService.getMessages('message').subscribe(data => {
+      this.getError(data);
+      if (data.diskUsage && data.men && data.tasks) {
+        this.sortDesc(data.tasks);
+        data.men['buff/cache'] = data.men['buff/cache'] / 100;
+        data.men.free = data.men.free / 100;
+        data.men.total = data.men.total / 100;
+        data.men.used = data.men.used / 100;
+        data.diskUsage.free = data.diskUsage.free / 1000;
+        data.diskUsage.total = data.diskUsage.total / 1000;
+        data.diskUsage.usage = data.diskUsage.usage / 1000;
+        this.tasksList = [];
+        this.tasksList = data.tasks;
+        this.collectionSize = this.tasksList.length;
+        this.loadCanvas(data.men);
+        this.loadCanvasDisk(data.diskUsage);
+      }
+    });
+    this.websocketService.emit('tasks', localStorage.getItem('machineId'));
+  }
+
+  getError(error: any) {
+    this.count++;
+    if (this.count === 1) {
+      if (error.status || error.status === 500) {
+        alert(`A conexão com ${this.machine.ip} não foi estabelecida! Verifique os dados!`);
+        this.location.back();
+        return;
+      }
+    }
   }
 
   onDelet(task: ITask) {
