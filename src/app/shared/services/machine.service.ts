@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-import { IMachine, Machine } from 'src/app/models/machine.model';
+import { IMachine } from 'src/app/models/machine.model';
 
 import { environment } from 'src/environments/environment';
 
@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 })
 export class MachineService {
 
-  // resourceUrl = 'http://localhost:3000/machines';
   resourceUrl = environment.API_URL + '/api/machines';
 
   constructor(private http: HttpClient) { }
@@ -28,12 +27,11 @@ export class MachineService {
     return this.http.delete(this.resourceUrl + '/' + machineId);
   }
 
-  create(machine: Machine | IMachine): Observable<IMachine> {
+  create(machine: IMachine): Observable<IMachine> {
     return this.http.post(this.resourceUrl, machine);
   }
 
-  update(machine: Machine | IMachine): Observable<IMachine> {
-    return this.http.put(this.resourceUrl + '/' + machine.id, machine);
+  update(machine: IMachine): Observable<IMachine> {
+    return this.http.put(this.resourceUrl, machine);
   }
-
 }

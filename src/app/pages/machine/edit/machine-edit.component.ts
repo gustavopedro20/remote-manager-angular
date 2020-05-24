@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IMachine } from 'src/app/models/machine.model';
 import { MachineService } from 'src/app/shared/services/machine.service';
 
+import { SystemType } from 'src/app/models/machine.model';
+
 import { take } from 'rxjs/operators';
 
 @Component({
@@ -14,6 +16,7 @@ import { take } from 'rxjs/operators';
 export class MachineEditComponent implements OnInit {
 
   machine: IMachine = {};
+  systemType = SystemType;
 
   form = this.fb.group({
     id: [''],

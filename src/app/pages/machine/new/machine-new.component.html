@@ -20,8 +20,8 @@
         <br>
 
         <mat-radio-group aria-label="Select an option" formControlName="system">
-            <mat-radio-button [value]="1" class="gg-radio">Unix</mat-radio-button>
-            <mat-radio-button [value]="2" class="gg-radio">Windows10</mat-radio-button>
+            <mat-radio-button [value]="systemType.UNIX" class="gg-radio">Unix</mat-radio-button>
+            <mat-radio-button [value]="systemType.WINDOWS" class="gg-radio">Windows10</mat-radio-button>
         </mat-radio-group>
         <br>
         <button mat-raised-button color="accent" class="gg-btn" (click)="redirect('machine')"

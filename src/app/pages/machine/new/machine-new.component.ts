@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
-import { IMachine } from 'src/app/models/machine.model';
-import { Route } from '@angular/compiler/src/core';
+import { IMachine, SystemType } from 'src/app/models/machine.model';
 import { MachineService } from 'src/app/shared/services/machine.service';
 import { take } from 'rxjs/operators';
 
@@ -14,6 +13,7 @@ import { take } from 'rxjs/operators';
 export class MachineNewComponent implements OnInit {
 
   machine: IMachine = {};
+  systemType = SystemType;
 
   form = this.fb.group({
     id: [''],
