@@ -1,14 +1,13 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 import * as Chart from 'chart.js';
 
 import { ITask } from 'src/app/models/task.model';
 import { SshService } from 'src/app/shared/services/ssh.service';
 import { IMen } from 'src/app/models/men.mode';
 import { WebsocketService } from 'src/app/shared/services/websocket.service';
-import { ITaskMenDiskDTO } from 'src/app/models/dto/tasks-men-diskDTO';
 import { IDiskUsage } from 'src/app/models/disk-usage.model';
 import { Utils } from 'src/app/shared/utils/utils';
 import { ActivatedRoute } from '@angular/router';
@@ -64,7 +63,7 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
       data: {
         labels: ['Total', 'Free', 'Used', 'Cache/buff'],
         datasets: [{
-          label: 'Estatística da mémoria em MB',
+          label: 'Estatística da mémoria em GB',
           data: [temp.total, temp.free, temp.used, temp['buff/cache']],
           backgroundColor: [this.blue, this.green, this.red, this.orange],
           borderWidth: 1
@@ -84,7 +83,7 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
       data: {
         labels: ['Total', 'Free', 'Used'],
         datasets: [{
-          label: 'Estatística do disco em MB',
+          label: 'Estatística do disco em GB',
           data: [disk.total, disk.free, disk.usage],
           backgroundColor: [this.aqua, this.purple, this.red],
           borderWidth: 1
@@ -101,13 +100,13 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
       this.getError(data);
       if (data.diskUsage && data.men && data.tasks) {
         this.sortDesc(data.tasks);
-        data.men['buff/cache'] = data.men['buff/cache'] / 100;
-        data.men.free = data.men.free / 100;
-        data.men.total = data.men.total / 100;
-        data.men.used = data.men.used / 100;
-        data.diskUsage.free = data.diskUsage.free / 1000;
-        data.diskUsage.total = data.diskUsage.total / 1000;
-        data.diskUsage.usage = data.diskUsage.usage / 1000;
+        // data.men['buff/cache'] = data.men['buff/cache'] / 100;
+        // data.men.free = data.men.free / 100;
+        // data.men.total = data.men.total / 100;
+        // data.men.used = data.men.used / 100;
+        // data.diskUsage.free = data.diskUsage.free / 1000;
+        // data.diskUsage.total = data.diskUsage.total / 1000;
+        // data.diskUsage.usage = data.diskUsage.usage / 1000;
         this.tasksList = [];
         this.tasksList = data.tasks;
         this.collectionSize = this.tasksList.length;
