@@ -1,5 +1,20 @@
 <div class="container">
-    <h3>Machine: {{ machine.ip }}</h3>
+    <ng-template #content let-modal>
+        <div class="modal-header">
+            <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>Você realmente deseja matar essa tarefa?</p>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-outline-primary" (click)="modal.close('yes')">Sim</button>
+            <button type="button" class="btn btn-outline-dark" (click)="modal.close('no')">Não</button>
+        </div>
+    </ng-template>
+
+    <h3>Machine: {{ machine?.ip }}</h3>
     <div class="row">
         <div class="col md-1">
             <canvas id="myChart" width="500" height="200"></canvas>
@@ -7,6 +22,9 @@
         <div class="col md-1">
             <canvas id="diskChart" width="500" height="200"></canvas>
         </div>
+    </div>
+    <div class="row" style="text-align: center; display: inline-flex;">
+        <canvas id="cpuChart" width="500" height="200"></canvas>
     </div>
     <br>
     <input type="search" placeholder="Pesquisar por task name" class="form-control gg-input" [(ngModel)]="terms"
@@ -48,7 +66,7 @@
                 <td>
                     <button type="button" class="btn btn-danger gg-btn"
                         style="background-color: #ffd740; border-color: #ffd740; color: #000000;"
-                        (click)="onDelet(task)">
+                        (click)="onDelet(task, content)">
                         <fa-icon [icon]="faTrashAlt"></fa-icon>
                     </button>
                 </td>

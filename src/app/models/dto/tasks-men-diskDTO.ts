@@ -6,4 +6,5 @@ export interface ITaskMenDiskDTO {
     tasks: ITask[];
     men: IMen;
     diskUsage: IDiskUsage;
+    cpuUsage: number;
 }

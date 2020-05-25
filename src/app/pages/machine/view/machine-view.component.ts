@@ -1,5 +1,7 @@
 import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Location } from '@angular/common';
 
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import { take } from 'rxjs/operators';
 import * as Chart from 'chart.js';
@@ -12,7 +14,6 @@ import { IDiskUsage } from 'src/app/models/disk-usage.model';
 import { Utils } from 'src/app/shared/utils/utils';
 import { ActivatedRoute } from '@angular/router';
 import { IMachine } from 'src/app/models/machine.model';
-import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-machine-view',
@@ -41,11 +42,16 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
   machine: IMachine = {};
   count = 0;
 
+  cpuChart: Chart;
+  ctxCpu: any;
+  canvasCpu: any;
+
   constructor(
     private sshService: SshService,
     private websocketService: WebsocketService,
     private route: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private modalService: NgbModal
   ) { }
 
   ngOnInit(): void { }
@@ -95,23 +101,39 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
     });
   }
 
+  loadCanvasCpu(cpuUsage: number) {
+    this.canvasCpu = document.getElementById('cpuChart');
+    this.ctxCpu = this.canvasCpu.getContext('2d');
+    this.cpuChart = new Chart(this.ctxCpu, {
+      type: 'pie',
+      data: {
+        labels: ['Total', 'Used'],
+        datasets: [{
+          data: [100, cpuUsage],
+          backgroundColor: [this.green, this.red],
+          fill: false
+        }]
+      },
+      options: {
+        title: {
+          display: true,
+          text: 'Estatística da cpu em %'
+        }
+      }
+    });
+  }
+
   loadTasksAndMen() {
     this.websocketService.getMessages('message').subscribe(data => {
       this.getError(data);
       if (data.diskUsage && data.men && data.tasks) {
         this.sortDesc(data.tasks);
-        // data.men['buff/cache'] = data.men['buff/cache'] / 100;
-        // data.men.free = data.men.free / 100;
-        // data.men.total = data.men.total / 100;
-        // data.men.used = data.men.used / 100;
-        // data.diskUsage.free = data.diskUsage.free / 1000;
-        // data.diskUsage.total = data.diskUsage.total / 1000;
-        // data.diskUsage.usage = data.diskUsage.usage / 1000;
         this.tasksList = [];
         this.tasksList = data.tasks;
         this.collectionSize = this.tasksList.length;
         this.loadCanvas(data.men);
         this.loadCanvasDisk(data.diskUsage);
+        this.loadCanvasCpu(data.cpuUsage);
       }
     });
     this.websocketService.emit('tasks', localStorage.getItem('machineId'));
@@ -128,13 +150,17 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
     }
   }
 
-  onDelet(task: ITask) {
-    this.sshService.deleteTask(task.PID).pipe(take(1)).subscribe(
-      () => {
-        this.tasksList.splice(this.tasksList.indexOf(this.tasksList.filter(x => x.PID === task.PID)[0]), 1);
-      },
-      () => alert('Erro ao tentar deletar task!')
-    );
+  onDelet(task: ITask, content: any) {
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then((result) => {
+      if (result === 'yes') {
+        this.sshService.deleteTask(task.PID, this.machine.id).pipe(take(1)).subscribe(
+          () => {
+            this.tasksList.splice(this.tasksList.indexOf(this.tasksList.filter(x => x.PID === task.PID)[0]), 1);
+          },
+          () => alert('Erro ao tentar deletar task!')
+        );
+      }
+    }, () => { });
   }
 
   get tasks(): ITask[] {

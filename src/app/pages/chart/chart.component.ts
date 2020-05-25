@@ -81,7 +81,7 @@ export class ChartComponent implements OnInit, AfterViewInit {
   }
 
   onDelet(task: ITask) {
-    this.sshService.deleteTask(task.PID).pipe(take(1)).subscribe(
+    this.sshService.deleteTask(task.PID, null).pipe(take(1)).subscribe(
       () => {
         this.tasksList.splice(this.tasksList.indexOf(this.tasksList.filter(x => x.PID === task.PID)[0]), 1);
       },

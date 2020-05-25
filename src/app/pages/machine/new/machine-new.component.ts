@@ -21,7 +21,7 @@ export class MachineNewComponent implements OnInit {
     port: ['', [Validators.required]],
     hostname: ['', [Validators.required]],
     password: ['', [Validators.required]],
-    system: ['', [Validators.required]],
+    system: [this.systemType.UNIX, [Validators.required]],
   });
 
   constructor(

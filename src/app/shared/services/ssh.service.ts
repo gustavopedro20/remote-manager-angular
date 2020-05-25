@@ -42,8 +42,8 @@ export class SshService {
     return tasks.sort((one, two) => (+one.PID > +two.PID ? 1 : -1));
   }*/
 
-  deleteTask(pid: string) {
-    return this.http.delete(`${environment.API_URL}/tasks?pid=${pid}`);
+  deleteTask(pid: string, machineId: number) {
+    return this.http.delete(`${environment.API_URL}/tasks?pid=${pid}&machineId=${machineId}`);
   }
 
 }
