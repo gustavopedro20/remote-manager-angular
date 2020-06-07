@@ -7,7 +7,7 @@ import { MachineEditComponent } from './edit/machine-edit.component';
 import { MachineNewComponent } from './new/machine-new.component';
 
 import { MaterialModule } from './../../shared/material/material.module';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms'
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -15,7 +15,7 @@ import { MachineComponent } from './machine.component';
 import { MachineRouterModule } from './machines-routing.module';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-import { NgxMaskModule } from 'ngx-mask'
+import { NgxMaskModule } from 'ngx-mask';
 import { environment } from 'src/environments/environment';
 import { MachineViewComponent } from './view/machine-view.component';
 
