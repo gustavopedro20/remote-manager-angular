@@ -15,6 +15,7 @@ import { MachineComponent } from './machine.component';
 import { MachineRouterModule } from './machines-routing.module';
 
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+import { NgxMaskModule } from 'ngx-mask'
 import { environment } from 'src/environments/environment';
 import { MachineViewComponent } from './view/machine-view.component';
 
@@ -36,7 +37,8 @@ const config: SocketIoConfig = { url: environment.API_URL, options: {} };
     NgbModule,
     MachineRouterModule,
     MatNativeDateModule,
-    SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config),
+    NgxMaskModule.forRoot()
   ]
 })
 export class MachineModule { }

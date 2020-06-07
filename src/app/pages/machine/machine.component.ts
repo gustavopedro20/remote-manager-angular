@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
-import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faTrashAlt, faEdit, faEye, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 import { take } from 'rxjs/operators';
 

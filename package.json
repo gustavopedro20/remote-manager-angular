@@ -28,6 +28,7 @@
     "@ng-bootstrap/ng-bootstrap": "^6.1.0",
     "bootstrap": "^4.4.0",
     "chart.js": "^2.9.3",
+    "ngx-mask": "^9.1.2",
     "ngx-socket-io": "^3.0.1",
     "rxjs": "~6.5.4",
     "socket.io": "^2.3.0",

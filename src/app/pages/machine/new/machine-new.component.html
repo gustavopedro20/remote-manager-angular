@@ -1,31 +1,67 @@
 <div class="container">
     <form [formGroup]="form">
-        <mat-form-field class="full-width">
-            <mat-label>IP</mat-label>
-            <input matInput placeholder="Ex. 192.168.1.1" formControlName="ip">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-            <mat-label>Port</mat-label>
-            <input matInput placeholder="Ex. 22" formControlName="port">
-        </mat-form-field>
+        <h3>Dados da Máquina</h3>
+        <div class="row" style="margin: auto; margin-bottom: auto; max-width: 40%;">
+            <div class="form-group col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>IP</mat-label>
+                    <input type="text" matInput placeholder="Ex. 192.168.1.1" formControlName="ip">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Port</mat-label>
+                    <input type="text" matInput placeholder="Ex. 22" formControlName="port">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Username</mat-label>
+                    <input type="text" matInput placeholder="Ex. my-machine" formControlName="hostname">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Password</mat-label>
+                    <input type="password" matInput placeholder="Ex. my-password" formControlName="password">
+                </mat-form-field>
+            </div>
+        </div>
         <br>
-        <mat-form-field class="full-width">
-            <mat-label>Username</mat-label>
-            <input matInput placeholder="Ex. my-machine" formControlName="hostname">
-        </mat-form-field>
-        <mat-form-field class="full-width">
-            <mat-label>Password</mat-label>
-            <input matInput placeholder="Ex. my-password" formControlName="password">
-        </mat-form-field>
-        <br>
+        <h3>Dados para notificação da máquina</h3>
+        <div class="row" style="margin: auto; margin-bottom: auto; max-width: 40%;">
+            <div class="form-group col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Email</mat-label>
+                    <input type="email" matInput placeholder="Ex. email@localhost" formControlName="email">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Máximo de CPU</mat-label>
+                    <input type="text" matInput placeholder="Ex. 20%" mask="percent" suffix="%"
+                        formControlName="maxCPUInPercent">
+                </mat-form-field>
+            </div>
+            <div class="form-group col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Máximo de Disco</mat-label>
+                    <input type="text" matInput placeholder="Ex. 20%" mask="percent" suffix="%"
+                        formControlName="maxDiscInPercent">
+                </mat-form-field>
 
-        <!-- <mat-radio-group aria-label="Select an option" formControlName="system">
-            <mat-radio-button [value]="systemType.UNIX" class="gg-radio">Unix</mat-radio-button>
-            <mat-radio-button [value]="systemType.WINDOWS" class="gg-radio">Windows10</mat-radio-button>
-        </mat-radio-group> -->
-        <br>
+            </div>
+            <div class="form-group col-md-6">
+                <mat-form-field class="full-width">
+                    <mat-label>Máximo de Memória</mat-label>
+                    <input type="text" matInput placeholder="Ex. 20%" mask="percent" suffix="%"
+                        formControlName="maxMenInPercent">
+                </mat-form-field>
+            </div>
+        </div>
         <button mat-raised-button color="accent" class="gg-btn" (click)="redirect('machine')"
             routerLinkActive="router-link-active">Back</button>
-        <button mat-raised-button color="primary" class="gg-btn" [disabled]="form.invalid" (click)="onSave()">Save</button>
+        <button mat-raised-button color="primary" class="gg-btn" [disabled]="form.invalid"
+            (click)="onSave()">Save</button>
     </form>
 </div>
