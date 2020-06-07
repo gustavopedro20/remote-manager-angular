@@ -127,8 +127,6 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
     this.websocketService.getMessages('message').subscribe(data => {
       this.getError(data);
       if (data.diskUsage && data.men && data.tasks) {
-        this.sortDesc(data.tasks);
-        this.tasksList = [];
         this.tasksList = data.tasks;
         this.collectionSize = this.tasksList.length;
         this.loadCanvas(data.men);
@@ -169,10 +167,6 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
       .map((tasks, i) => ({ id: i + 1, ...tasks }))
       .filter(x => this.taskFilter(x))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
-  }
-
-  sortDesc(tasks: ITask[]) {
-    return tasks.sort((one, two) => (+one.PID > +two.PID ? 1 : -1));
   }
 
   taskFilter(task: ITask): boolean {
