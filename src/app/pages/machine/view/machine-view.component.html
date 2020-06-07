@@ -36,39 +36,23 @@
             <tr>
                 <th scope="col">PID</th>
                 <th scope="col">User</th>
-                <!-- <th scope="col">PR</th>
-                <th scope="col">NI</th>
-                <th scope="col">VIRT</th>
-                <th scope="col">RES</th>
-                <th scope="col">SHR</th>
-                <th scope="col">S</th> -->
                 <th scope="col">%CPU</th>
                 <th scope="col">%MEM</th>
                 <th scope="col">TIME+</th>
                 <th scope="col">Task Name</th>
-                <th scope="col">Ações</th>
+                <th scope="col"></th>
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let task of taskFilter(terms); let i = index">
+            <tr *ngFor="let task of tasks; let i = index">
                 <th scope="row">{{ task.PID }}</th>
                 <td>{{ task.USER }}</td>
-                <!-- <td>{{ task.PR }}</td>
-                <td>{{ task.NI }}</td>
-                <td>{{ task.VIRT }}</td>
-                <td>{{ task.RES }}</td>
-                <td>{{ task.SHR }}</td>
-                <td>{{ task.S }}</td> -->
                 <td>{{ task.CPU }}</td>
                 <td>{{ task.MEM }}</td>
                 <td>{{ task.TIME }}</td>
                 <td>{{ task.COMMAND }}</td>
                 <td>
-                    <button type="button" class="btn btn-danger gg-btn"
-                        style="background-color: #ffd740; border-color: #ffd740; color: #000000;"
-                        (click)="onDelet(task, content)">
-                        <fa-icon [icon]="faTrashAlt"></fa-icon>
-                    </button>
+                    <fa-icon (click)="onDelet(task, content)" [icon]="faTrashAlt" style="cursor: pointer;"></fa-icon>
                 </td>
             </tr>
         </tbody>

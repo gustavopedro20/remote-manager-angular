@@ -1,3 +1,5 @@
+import { Config } from './config.model';
+
 export enum SystemType {
     UNIX = 'UNIX',
     WINDOWS = 'WINDOWS'
@@ -9,6 +11,7 @@ export interface IMachine {
     password?: string;
     port?: string;
     system?: SystemType;
+    config?: Config;
 }
 
 export class Machine implements IMachine {
@@ -18,6 +21,7 @@ export class Machine implements IMachine {
         public hostname?: string,
         public password?: string,
         public port?: string,
-        public system?: SystemType
+        public system?: SystemType,
+        public config?: Config
     ) { }
 }

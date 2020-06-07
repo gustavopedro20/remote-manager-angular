@@ -164,8 +164,10 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
   }
 
   get tasks(): ITask[] {
+    this.collectionSize = 0;
     return this.tasksList
       .map((tasks, i) => ({ id: i + 1, ...tasks }))
+      .filter(x => this.taskFilter(x))
       .slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize);
   }
 
@@ -173,10 +175,16 @@ export class MachineViewComponent implements OnInit, AfterViewInit {
     return tasks.sort((one, two) => (+one.PID > +two.PID ? 1 : -1));
   }
 
-  taskFilter(terms?: string) {
-    return Utils.isNullOrWhiteSpaces(terms) ?
-      this.tasks :
-      this.tasks
-        .filter(x => x.COMMAND != null && x.COMMAND.toLowerCase().includes(terms.toLowerCase()));
+  taskFilter(task: ITask): boolean {
+    if (this.terms === undefined || this.terms === '' || this.terms === null) {
+      this.collectionSize++;
+      return true;
+    } else {
+      if (task.COMMAND != null && task.COMMAND.toLowerCase().includes(this.terms.toLowerCase())) {
+        this.collectionSize++;
+        return true;
+      }
+      return false;
+    }
   }
 }
