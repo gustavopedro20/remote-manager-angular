@@ -64,4 +64,8 @@ export class MachineComponent implements OnInit {
     localStorage.setItem('machineId', machineId);
     this.router.navigate(['view', machineId], { relativeTo: this.route });
   }
+
+  hashPassword(password: string) {
+    return '*'.repeat(password.length);
+  }
 }

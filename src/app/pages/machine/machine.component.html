@@ -30,7 +30,7 @@
                 <td>{{ machine.ip }}</td>
                 <td>{{ machine.port }}</td>
                 <td>{{ machine.hostname }}</td>
-                <td>{{ machine.password }}</td>
+                <td>{{ hashPassword(machine.password) }}</td>
                 <td>
                     <button type="button" class="btn btn-success gg-btn" (click)="onView(machine.id)">
                         <fa-icon [icon]="faEye"></fa-icon>
